@@ -16,25 +16,9 @@
 
 package com.example.marsphotos.network
 
-import com.squareup.retrofit2.Retrofit
-import com.squareup.retrofit2.converter.scalars.ScalarsConverterFactory
-import com.squareup.retrofit2.http.GET
-
-private const val BASE_URL =
-    "https://android-kotlin-fun-mars-server.appspot.com"
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
-    .baseUrl(BASE_URL)
-    .build()
+import retrofit2.http.GET
 
 interface MarsApiService {
     @GET("photos")
-    suspend fun getPhotos(): String
-}
-
-object MarsApi {
-    val retrofitService : MarsApiService by lazy {
-        retrofit.create(MarsApiService::class.java)
-    }
+    suspend fun getPhotos(): List<MarsPhoto>
 }
